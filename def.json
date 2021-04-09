@@ -1,5 +1,11 @@
 {
   "classes": {
-    "cfengine_internal_masterfiles_update": [ "policy_hub::", "am_policy_server::", "policy_server::", "am_policy_hub::" ]
+    "cfengine_internal_masterfiles_update": [ "policy_hub::", "am_policy_server::", "policy_server::", "am_policy_hub::" ],
+    "cfengine_internal_purge_policies": [ "any::" ],
+    "mpf_augments_control_enabled": [ "any::" ]
+  },
+  "vars": {
+    "control_executor_splaytime": "1",
+    "control_executor_schedule": [ "any" ]
   }
 }
