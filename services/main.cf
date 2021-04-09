@@ -15,4 +15,10 @@ bundle agent main
      "hello_world"
        string => "My first policy!",
        meta =>  {"inventory", "attribute_name=Hello world" };
+       
+  files:
+    "/tmp/example.txt"
+      create => "true",
+      content => "This file should contain this text.";
+      
 }
