@@ -16,15 +16,35 @@ bundle agent main
        string => "My first policy!",
        meta =>  {"inventory", "attribute_name=Hello world" };
        
-  files:
-    "/tmp/example.txt"
-      create => "true",
-      content => "This file should contain this text.";
-      
+
       
   commands:
     "/run/this"
       comment => "This command just doesn't exist, the promise should fail";
       
+      # This will be a promise repaired
+    "/bin/echo 'Hello world'" handle => "example_echo_command_promise_kept";
+    
+    "/bin/true";
+    
+    "/bin/false";
+      
+      
+   methods:
+     Friday::
+       "Run My policy on friday" usebundle => chiacheng;
+       
+      
+}
+
+bundle agent chiacheng
+{
+  commands:
+      "/bin/echo 'Hello world from Chiacheng'";
+      
+  files:
+    "/tmp/example.txt"
+      create => "true",
+      content => "This file should contain this text.";
       
 }
