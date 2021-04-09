@@ -1,0 +1,5 @@
+{
+  "classes": {
+    "cfengine_internal_masterfiles_update": [ "policy_hub::", "am_policy_server::", "policy_server::", "am_policy_hub::" ]
+  }
+}
