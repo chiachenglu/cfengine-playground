@@ -1,0 +1,4 @@
+#+TITLE: CFEngine Playground
+
+Policy for playing with CFEngine Enterprise and Mission Portal, particularly within the vagrant quickstart.
+

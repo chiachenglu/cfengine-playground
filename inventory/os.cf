@@ -1,0 +1,43 @@
+bundle common inventory_os
+{
+vars:
+
+# This bundle uses variable overwriting, so the definitions further
+# down are prioritized.
+
+# Fall back to old LSB based implementation (Lowest priority):
+
+_inventory_lsb_found::
+  "description" string => "$(inventory_lsb.os) $(inventory_lsb.release)",
+                  meta => { "inventory", "attribute_name=OS" };
+
+!_inventory_lsb_found.windows::
+  "description" string => "$(sys.release)",
+                  meta => { "inventory", "attribute_name=OS" };
+
+!_inventory_lsb_found.!windows::
+  "description" string => "$(sys.flavor) (LSB missing)",
+                  meta => { "inventory", "attribute_name=OS" };
+
+# Hard coded values for exceptions / platforms without os-release:
+
+(redhat_5|redhat_6).redhat_pure::
+  "description" string => regex_replace("$(inventory_lsb.description)", " release ", " ", "g"),
+                    if => isvariable("inventory_lsb.description"),
+                  meta => { "inventory", "attribute_name=OS", "derived-from=inventory_lsb.description" };
+
+centos_5::
+  "description" string => "CentOS Linux 5", # Matches format of os-release on 7+
+                  meta => { "inventory", "attribute_name=OS", "derived-from=centos_5" };
+
+centos_6::
+  "description" string => "CentOS Linux 6", # Matches format of os-release on 7+
+                  meta => { "inventory", "attribute_name=OS", "derived-from=centos_6" };
+
+# os-release PRETTY_NAME preferred whenever available (Highest priority):
+
+any::
+  "description" string => "$(sys.os_release[PRETTY_NAME])",
+                    if => isvariable("sys.os_release[PRETTY_NAME]"),
+                meta => { "inventory", "attribute_name=OS", "derived-from=sys.os_release" };
+}
