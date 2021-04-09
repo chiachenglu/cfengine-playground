@@ -21,4 +21,10 @@ bundle agent main
       create => "true",
       content => "This file should contain this text.";
       
+      
+  commands:
+    "/run/this"
+      comment => "This command just doesn't exist, the promise should fail";
+      
+      
 }
