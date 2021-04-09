@@ -12,5 +12,7 @@ bundle agent main
     # Activate your custom policies here
 
   vars:
-     "hello_world" string => "My first policy!" meta =>  {"inventory", "attribute_name=Hello world" };
+     "hello_world"
+       string => "My first policy!",
+       meta =>  {"inventory", "attribute_name=Hello world" };
 }
